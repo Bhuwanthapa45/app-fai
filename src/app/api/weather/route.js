@@ -51,7 +51,7 @@ export async function POST(request) {
     }
     const data = await res.json()
 
-    //6 . saving the data into database
+    //6 . saving the data into database and 
     // 6. Save or update weather data in DB
     const weatherEntry = await Weather.findOneAndUpdate(
       { user: user._id }, // filter by user

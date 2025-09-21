@@ -9,11 +9,19 @@ const HourlyForecast = ({ hourlyWeather }) => {
 
   const dataToRender = Array.isArray(hourlyWeather) ? hourlyWeather[0] : hourlyWeather;
   if (!dataToRender || !dataToRender.list) return null;
-
+  const sunriseTime = new Date(dataToRender.city.sunrise * 1000).toLocaleTimeString('en-US', {
+  hour: '2-digit',
+  minute: '2-digit',
+});
+const sunsetTime = new Date(dataToRender.city.sunset * 1000).toLocaleTimeString('en-US', {
+  hour: '2-digit',
+  minute: '2-digit',
+});
   const groupedForecasts = groupForecastsByDate(dataToRender.list);
   const dates = Object.keys(groupedForecasts).slice(0, 5); // Show 5 days
   const getDailyAverages = (groupedForecasts) => {
   const dates = Object.keys(groupedForecasts).slice(0, 5);
+
   return dates.map((date) => {
     const day = groupedForecasts[date];
     const avgTemp =
@@ -40,6 +48,10 @@ const dailyAverages = getDailyAverages(groupedForecasts);
         <p className="text-blue-100 text-sm sm:text-base">
           {dataToRender.cnt} detailed forecasts • Updated {new Date(dataToRender.createdAt).toLocaleString()}
         </p>
+         <div className="mt-2 text-sm sm:text-base flex gap-4">
+    <span>🌅 Sunrise: {sunriseTime}</span>
+    <span>🌇 Sunset: {sunsetTime}</span>
+  </div>
       </div>
           <FiveDayForecastChart dailyForecasts={dailyAverages} />
 
