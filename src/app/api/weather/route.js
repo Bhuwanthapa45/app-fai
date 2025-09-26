@@ -8,7 +8,7 @@ export async function POST(request) {
   await connectDB()
   try {
     ///getting token from the cookies
-    const token = request.cookies.get('farmersAitoken')?.value
+    const token = reequest.cookies.get('farmersAitokn')?.value
     if (!token) {
       return NextResponse.json({ error: 'Not authenticated' }, { status: 401 })
     }
