@@ -5,12 +5,20 @@ const SoilMoistureDisplay = ({ soilMoisture }) => {
   if (!soilMoisture || !soilMoisture.data || soilMoisture.data.length === 0) {
     return null
   }
+    // ✅ Calculate average soil moisture
+  const averageMoisture =
+    soilMoisture.data.reduce((sum, entry) => sum + entry.numericValue, 0) /
+    soilMoisture.data.length
 
   return (
     <div className="mt-8 bg-white/70 backdrop-blur-lg border border-gray-200 p-6 rounded-2xl shadow-md">
       <h2 className="text-2xl font-semibold text-gray-800 mb-4">
         🌱 Soil Moisture (0–10 cm)
       </h2>
+      {/* ✅ Display Average Moisture */}
+      <p className="text-lg font-medium text-gray-700 mb-4">
+        Average Moisture: <span className="font-semibold text-blue-700">{averageMoisture.toFixed(3)} m³/m³</span>
+      </p>
       
       <div className="overflow-x-auto">
         <table className="min-w-full text-sm text-gray-700 border border-gray-200 rounded-lg">

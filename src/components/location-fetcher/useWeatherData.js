@@ -5,6 +5,7 @@ const useWeatherData = () => {
   const [weather, setWeather] = useState(null);
   const [hourlyWeather, setHourlyWeather] = useState(null);
   const [soilMoisture, setSoilMoisture] = useState(null); 
+  const [pestPrediction, setPestPrediction] = useState(null);
   const [loading, setLoading] = useState(false);
   const [dataLoading, setDataLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -160,6 +161,52 @@ const useWeatherData = () => {
     }
   };
 
+
+
+  // ---------- PEST PREDICTION ----------
+  const fetchStoredPestPrediction = async () => {
+    try {
+      console.log('Fetching stored pest prediction...');
+      const res = await fetch('/api/pest-predict', { method: 'GET', credentials: 'include' });
+      if (!res.ok) throw new Error('Failed to fetch pest prediction');
+      const data = await res.json();
+      console.log('Stored pest prediction response:', data);
+      setPestPrediction(data.prediction);
+    } catch (err) {
+      console.error('Error fetching stored pest prediction:', err);
+      setError(err.message);
+    }
+  };
+
+  const sendPestPrediction = async () => {
+    try {
+      console.log('Posting pest prediction request...');
+      const params = {
+        temperature: 32.0,
+        humidity: 85.0,
+        rainfall: 180.0,
+        soil_moisture: 0.35,
+        wind_speed: 1.2,
+      };
+
+      const res = await fetch('/api/pest-predict', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify(params),
+      });
+
+      if (!res.ok) throw new Error('Failed to send pest prediction');
+      const data = await res.json();
+      console.log('Pest prediction POST response:', data);
+      setPestPrediction(data.prediction);
+    } catch (err) {
+      console.error('Error posting pest prediction:', err);
+      setError(err.message);
+    }
+  };
+
+
   const getLocationAndWeather = () => {
     if (!navigator.geolocation) {
       setError('Geolocation is not supported by your browser. Use a different browser please');
@@ -195,11 +242,14 @@ const useWeatherData = () => {
     weather,
     hourlyWeather,
         soilMoisture,
+        pestPrediction,
     loading,
     dataLoading,
     error,
     getLocationAndWeather,
-    clearError
+    clearError,
+     fetchStoredPestPrediction, // 🐛 new
+    sendPestPrediction, // 
   };
 };
 

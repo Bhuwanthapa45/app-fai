@@ -5,6 +5,9 @@ import { Bar, BarChart, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGri
 export default function FiveDayForecastChart({ dailyForecasts }) {
   if (!dailyForecasts || dailyForecasts.length === 0) return null
 
+
+  
+
   // Color mapping for temperature
   const getTempColor = (temp) => {
     if (temp >= 35) return "#ef4444" // hot
