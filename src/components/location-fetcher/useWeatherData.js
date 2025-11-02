@@ -4,6 +4,7 @@ const useWeatherData = () => {
   const [location, setLocation] = useState(null);
   const [weather, setWeather] = useState(null);
   const [hourlyWeather, setHourlyWeather] = useState(null);
+  const [soilMoisture, setSoilMoisture] = useState(null); 
   const [loading, setLoading] = useState(false);
   const [dataLoading, setDataLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -54,6 +55,56 @@ const useWeatherData = () => {
     }
   };
 
+   // ✅ Fetch stored soil moisture data
+  const fetchStoredSoilMoisture = async () => {
+    try {
+      console.log('Fetching stored soil moisture data...');
+      const res = await fetch('/api/soilmoisture', {
+        method: 'GET',
+        credentials: 'include',
+      });
+
+      if (!res.ok) {
+        const err = await res.json();
+        console.error('Soil moisture GET failed:', err);
+        throw new Error(err.error || 'Failed to fetch stored soil moisture');
+      }
+
+      const data = await res.json();
+      console.log('Stored soil moisture response:', data);
+      setSoilMoisture(data.soilData);
+    } catch (err) {
+      console.error('Error fetching stored soil moisture:', err);
+      setError(prev => prev ? `${prev}; ${err.message}` : err.message);
+    }
+  };
+
+  // ✅ Post coordinates and store new soil moisture data
+  const fetchSoilMoistureData = async (coords) => {
+    try {
+      console.log('Posting soil moisture request...');
+      const res = await fetch('/api/soilmoisture', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ lat: coords.lat, lon: coords.lon }),
+      });
+
+      if (!res.ok) {
+        const err = await res.json();
+        console.error('Soil moisture POST failed:', err);
+        throw new Error(err.error || 'Failed to fetch soil moisture data');
+      }
+
+      const data = await res.json();
+      console.log('Soil moisture POST response:', data);
+      setSoilMoisture(data.soilDoc);
+    } catch (err) {
+      console.error('Error posting soil moisture data:', err);
+      setError(prev => prev ? `${prev}; ${err.message}` : err.message);
+    }
+  };
+
   const fetchWeatherData = async (coords) => {
     try {
       setDataLoading(true);
@@ -93,11 +144,13 @@ const useWeatherData = () => {
 
       const hourlyWeatherData = await hourlyWeatherRes.json();
       console.log('Hourly weather POST response:', hourlyWeatherData);
+       await fetchSoilMoistureData(coords);
 
       // Fetch stored data after successful API calls
       await Promise.all([
         fetchStoredWeather(),
-        fetchStoredHourlyWeather()
+        fetchStoredHourlyWeather(),
+               fetchStoredSoilMoisture()
       ]);
     } catch (err) {
       console.error('Error in fetchWeatherData:', err);
@@ -141,6 +194,7 @@ const useWeatherData = () => {
     location,
     weather,
     hourlyWeather,
+        soilMoisture,
     loading,
     dataLoading,
     error,

@@ -8,12 +8,15 @@ import {
   HourlyForecast, 
   useWeatherData 
 } from './location-fetcher'
+import SoilMoistureDisplay from './location-fetcher/SoilMoistureDisplay'
 
 const LocationFetcher = () => {
   const {
     location,
     weather,
     hourlyWeather,
+    soilMoisture,
+    
     loading,
     dataLoading,
     error,
@@ -36,6 +39,8 @@ const LocationFetcher = () => {
       <CurrentWeather weather={weather} />
       
       <HourlyForecast hourlyWeather={hourlyWeather} />
+      {/* ✅ New soil moisture section */}
+      <SoilMoistureDisplay soilMoisture={soilMoisture} />
     </div>
   )
 }
