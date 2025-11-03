@@ -4,7 +4,7 @@ import { connectDB } from "@/lib/db";
 import User from "@/models/User";
 import Chat from "@/models/Chat";
 
-const FASTAPI_URL = "http://localhost:8000/rag"; // FastAPI RAG endpoint
+const FASTAPI_URL = "http://localhost:8002/rag"; // FastAPI RAG endpoint
 
 export async function POST(request) {
   await connectDB();
