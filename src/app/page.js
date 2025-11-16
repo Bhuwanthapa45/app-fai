@@ -1,5 +1,6 @@
 'use client';
 import React from 'react';
+import Link from 'next/link';
 // lucide-react icons
 import {
   Leaf,
@@ -44,18 +45,18 @@ const Header = () => (
       <div className="flex items-center justify-between h-16">
         <div className="flex items-center gap-3">
           <Leaf className="text-green-700 text-3xl" />
-          <h2 className="text-green-700 text-xl font-bold tracking-tight">Farmers AI</h2>
+          <h2 className="text-green-700 text-2xl font-bold tracking-tight">Farmers AI</h2>
         </div>
 
-        <nav className="hidden md:flex items-center gap-8">
+        <nav className="hidden md:flex items-center gap-8 text-[#593E31]">
           <a className="nav-link" href="#features">Features</a>
           <a className="nav-link" href="#how-it-works">How It Works</a>
           <a className="nav-link" href="#mission">Mission</a>
         </nav>
 
-        <button className="hidden md:flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-green-600 text-white text-sm font-bold tracking-wide hover:opacity-90 transition-opacity">
-          <span>Launch Assistant</span>
-        </button>
+      <Link href="/login" className="hidden md:flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#F7D720] text-[#593E31] text-sm font-bold tracking-wide hover:opacity-90 transition-opacity">
+  Launch Assistant
+</Link>
 
         <button className="md:hidden text-green-600 dark:text-green-500">
           <Menu className="text-3xl" />
@@ -102,14 +103,18 @@ function HeroSection() {
             <h1 className="text-white text-4xl sm:text-6xl font-black tracking-tight">
               Empowering Farmers with Intelligent, Hyper-Localized Insights.
             </h1>
-            <p className="text-light-gray/90 text-base sm:text-lg">
+            <p className="text-white text-base sm:text-lg">
               Farmers AI translates complex agricultural data into simple, actionable advice.
             </p>
           </div>
 
           <div className="flex flex-wrap gap-4 justify-center">
-            <button className="btn-primary">Launch Assistant</button>
-            <button className="btn-secondary">Learn More</button>
+             <Link href="/login" className="hidden md:flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#F7D720] text-[#593E31] text-sm font-bold tracking-wide hover:opacity-90 transition-opacity">
+  Launch Assistant
+</Link>
+             <Link href="/signup" className="hidden md:flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-white text-[#593E31] text-sm font-bold tracking-wide hover:opacity-90 transition-opacity">
+  Sign Up for Free
+</Link>
           </div>
         </div>
       </div>

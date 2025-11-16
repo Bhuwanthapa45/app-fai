@@ -4,7 +4,19 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import axios from 'axios'
-
+import {
+  Leaf,
+  Menu,
+  CloudRain,
+  Smartphone,
+  PieChart,
+  MessageCircle,
+  BarChart,
+  Bell,
+  Satellite,
+  HeartHandshake,
+  Globe,
+} from 'lucide-react';
 export default function LoginPage() {
   const router = useRouter()
   const [user, setUser] = useState({ email: '', password: '' })
@@ -38,7 +50,9 @@ export default function LoginPage() {
   }
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center bg-gray-900 text-white">
+    <>
+       <Header />
+    <main className="flex min-h-screen flex-col items-center justify-center bg-gray-100 text-gray-900">
       <div className="w-full max-w-xs">
         <h1 className="mb-6 text-center text-3xl font-bold">
           {loading ? 'Logging in...' : 'Login'}
@@ -80,5 +94,29 @@ export default function LoginPage() {
         </p>
       </div>
     </main>
+    </>
   )
 }
+
+const Header = () => (
+  <header className="sticky top-0 z-50 w-full backdrop-blur-md bg-gray-100/80 dark:bg-gray-800/80 border-b border-green-600/20">
+    <div className="container mx-auto px-4">
+      <div className="flex items-center justify-between h-16">
+        <div className="flex items-center gap-3">
+          <Leaf className="text-green-700 text-3xl" />
+          <h2 className="text-green-700 text-2xl font-bold tracking-tight">Farmers AI</h2>
+        </div>
+
+       
+
+      <Link href="/signup" className="hidden md:flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#F7D720] text-[#593E31] text-sm font-bold tracking-wide hover:opacity-90 transition-opacity">
+  Sign Up for Free
+</Link>
+
+        <button className="md:hidden text-green-600 dark:text-green-500">
+          <Menu className="text-3xl" />
+        </button>
+      </div>
+    </div>
+  </header>
+);
