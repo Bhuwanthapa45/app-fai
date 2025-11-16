@@ -1,34 +1,61 @@
-const CurrentWeather = ({ weather }) => {
+// components/location-fetcher/CurrentWeather.jsx
+"use client";
+
+export default function CurrentWeather({ weather }) {
   if (!weather) return null;
 
   return (
-    <div className="mb-6 bg-gradient-to-r from-orange-400 to-red-500 text-white p-6 rounded-lg shadow-lg">
-      <h2 className="text-2xl font-bold mb-4">
-        Current Weather in {weather.name}
-      </h2>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div className="text-center">
-          <p className="text-3xl font-bold">{weather.main?.temp}°C</p>
-          <p className="text-orange-100">Temperature</p>
+    <div className="w-full bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-md p-6">
+
+      {/* HEADER */}
+      <div className="flex items-center justify-between mb-5">
+        <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100">
+          Current Weather — <span className="text-emerald-600">{weather.name}</span>
+        </h2>
+      </div>
+
+      {/* MAIN GRID */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+
+        {/* Temperature */}
+        <div className="flex flex-col items-center bg-emerald-50 dark:bg-emerald-900/20 p-4 rounded-xl">
+          <p className="text-4xl font-bold text-emerald-700 dark:text-emerald-300">
+            {weather.main?.temp}°C
+          </p>
+          <p className="text-sm text-gray-600 dark:text-gray-400">Temperature</p>
         </div>
-        <div className="text-center">
-          <p className="text-3xl font-bold">{weather.main?.feels_like}°C</p>
-          <p className="text-orange-100">Feels Like</p>
+
+        {/* Feels Like */}
+        <div className="flex flex-col items-center bg-orange-50 dark:bg-orange-900/20 p-4 rounded-xl">
+          <p className="text-4xl font-bold text-orange-600 dark:text-orange-300">
+            {weather.main?.feels_like}°C
+          </p>
+          <p className="text-sm text-gray-600 dark:text-gray-400">Feels Like</p>
         </div>
-        <div className="text-center">
-          <p className="text-3xl font-bold">{weather.main?.humidity}%</p>
-          <p className="text-orange-100">Humidity</p>
+
+        {/* Humidity */}
+        <div className="flex flex-col items-center bg-blue-50 dark:bg-blue-900/20 p-4 rounded-xl">
+          <p className="text-4xl font-bold text-blue-600 dark:text-blue-300">
+            {weather.main?.humidity}%
+          </p>
+          <p className="text-sm text-gray-600 dark:text-gray-400">Humidity</p>
         </div>
-        <div className="text-center">
-          <p className="text-3xl font-bold">{weather.wind?.speed} m/s</p>
-          <p className="text-orange-100">Wind Speed</p>
+
+        {/* Wind */}
+        <div className="flex flex-col items-center bg-indigo-50 dark:bg-indigo-900/20 p-4 rounded-xl">
+          <p className="text-4xl font-bold text-indigo-600 dark:text-indigo-300">
+            {weather.wind?.speed} m/s
+          </p>
+          <p className="text-sm text-gray-600 dark:text-gray-400">Wind Speed</p>
         </div>
       </div>
-      <div className="mt-4 text-center">
-        <p className="text-xl capitalize">{weather.weather?.[0]?.description}</p>
+
+      {/* WEATHER DESCRIPTION */}
+      <div className="text-center mt-6">
+        <p className="text-lg font-medium capitalize text-gray-700 dark:text-gray-300">
+          {weather.weather?.[0]?.description}
+        </p>
       </div>
     </div>
   );
-};
-
-export default CurrentWeather;
+}
