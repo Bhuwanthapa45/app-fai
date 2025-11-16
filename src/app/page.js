@@ -65,27 +65,61 @@ const Header = () => (
   </header>
 );
 
-const HeroSection = () => (
-  <section className="relative">
-    <div className="container mx-auto px-4 py-20 sm:py-32">
-      <div className="flex min-h-[480px] flex-col gap-8 rounded-xl items-center justify-center text-center bg-gradient-to-r from-green-700 to-green-900 p-6 sm:p-10">
-        <div className="flex flex-col gap-4 max-w-3xl">
-          <h1 className="text-white text-4xl font-black sm:text-6xl">
-            Empowering Farmers with Intelligent, Hyper-Localized Insights.
-          </h1>
-          <h2 className="text-gray-200 text-base sm:text-lg">
-            Farmers AI translates complex agricultural data into simple, actionable advice.
-          </h2>
-        </div>
+// const HeroSection = () => (
+  
+//   <section className="relative">
+//     <div className="container mx-auto px-4 py-20 sm:py-32">
+//       <div className="flex min-h-[480px] flex-col gap-8 rounded-xl items-center justify-center text-center bg-gradient-to-r from-green-700 to-green-900 p-6 sm:p-10">
+//         <div className="flex flex-col gap-4 max-w-3xl">
+//           <h1 className="text-white text-4xl font-black sm:text-6xl">
+//             Empowering Farmers with Intelligent, Hyper-Localized Insights.
+//           </h1>
+//           <h2 className="text-gray-200 text-base sm:text-lg">
+//             Farmers AI translates complex agricultural data into simple, actionable advice.
+//           </h2>
+//         </div>
 
-        <div className="flex flex-wrap gap-4 justify-center">
-          <button className="btn-primary-yellow">Launch Assistant</button>
-          <button className="btn-secondary-light">Learn More</button>
+//         <div className="flex flex-wrap gap-4 justify-center">
+//           <button className="btn-primary-yellow">Launch Assistant</button>
+//           <button className="btn-secondary-light">Learn More</button>
+//         </div>
+//       </div>
+//     </div>
+//   </section>
+// );
+function HeroSection() {
+  const bgImage =
+    'linear-gradient(rgba(11, 83, 69, 0.6), rgba(11, 83, 69, 0.8)), url("https://lh3.googleusercontent.com/aida-public/AB6AXuCS6T8cYyACwHzXWG-p1YIMRKR0KojQokU2z_8m0YjyO2bb7yBeuARdf3QchDYFg7YafyCVMPR9CF9NXfwHdhQVa15klbBYrgNcPPwjsMVNRdDrj-iEwhosFmpkaFQPmEsbtw1Rqn4z40k-jzbv8-mmO2I1-dm7P-gXG8Ijeue8__I15HgnwNtCnYuK8cHirDN93hM3EyGbmEQ_ug1ZOHPKFZ048y-BoQCGqmaduvcXR8wOwCIqzvtcDocjRNBFVUGdbKnLBZ_6n6qd")';
+
+  return (
+    <section className="relative">
+      <div className="container mx-auto px-4 py-20 sm:py-32">
+        <div
+          className="flex min-h-[480px] flex-col gap-8 rounded-xl items-center justify-center text-center bg-cover bg-center p-6 sm:p-10"
+          style={{ backgroundImage: bgImage }}
+        >
+          <div className="flex flex-col gap-4 max-w-3xl">
+            <h1 className="text-white text-4xl sm:text-6xl font-black tracking-tight">
+              Empowering Farmers with Intelligent, Hyper-Localized Insights.
+            </h1>
+            <p className="text-light-gray/90 text-base sm:text-lg">
+              Farmers AI translates complex agricultural data into simple, actionable advice.
+            </p>
+          </div>
+
+          <div className="flex flex-wrap gap-4 justify-center">
+            <button className="btn-primary">Launch Assistant</button>
+            <button className="btn-secondary">Learn More</button>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+}
+
+
+
+
 
 const ProblemSolutionSection = () => (
   <section className="container mx-auto px-4 py-16 sm:py-24" id="features">
